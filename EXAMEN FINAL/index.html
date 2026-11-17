@@ -1,0 +1,2361 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Matemáticas en Acción | Evaluación Final</title>
+
+<link rel="icon" href="./img/WhatsApp%20Image%202026-09-09%20at%2011.06.59%20AM.jpeg">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+/* =====================================
+   DISEÑO GENERAL
+===================================== */
+
+:root {
+    --azul: #174b83;
+    --azul2: #236da9;
+    --azul-claro: #eaf3fc;
+    --naranja: #f2a23a;
+    --rojo: #df6548;
+    --texto: #26384b;
+    --gris: #6c7c8d;
+    --fondo: #f3f6fa;
+    --blanco: #ffffff;
+    --borde: #dce5ee;
+    --verde: #27965a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+}
+
+button, input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* =====================================
+   ENCABEZADO
+===================================== */
+
+.encabezado {
+    background: white;
+    border-bottom: 4px solid var(--naranja);
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    min-height: 115px;
+}
+
+.logo-curso {
+    width: 76px;
+    height: 76px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.titulo-encabezado h1 {
+    margin: 0;
+    color: var(--azul);
+    font-size: 23px;
+    letter-spacing: 1.2px;
+}
+
+.titulo-encabezado p {
+    margin: 7px 0 0;
+    color: var(--gris);
+    font-size: 14px;
+}
+
+/* =====================================
+   CONTENEDOR
+===================================== */
+
+.contenedor {
+    width: 94%;
+    max-width: 1050px;
+    margin: 30px auto 45px;
+}
+
+.tarjeta {
+    background: white;
+    border: 1px solid #e8edf3;
+    border-radius: 15px;
+    padding: 28px;
+    box-shadow: 0 5px 20px rgba(30, 65, 100, .06);
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* =====================================
+   INICIO
+===================================== */
+
+.inicio {
+    max-width: 760px;
+    margin: 25px auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+.portada {
+    background: linear-gradient(120deg, #174b83, #2879b7);
+    color: white;
+    padding: 28px 15px;
+    border-radius: 12px;
+    margin: -28px -28px 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.portada::before,
+.portada::after {
+    content: "";
+    position: absolute;
+    border: 2px solid rgba(255,255,255,.16);
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+}
+
+.portada::before {
+    left: -65px;
+    top: -80px;
+}
+
+.portada::after {
+    right: -55px;
+    bottom: -100px;
+}
+
+.portada-simbolos {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 18px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.portada h2 {
+    color: white;
+    font-size: 25px;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.portada p {
+    margin: 9px 0 0;
+    color: #e7f1fc;
+    position: relative;
+    z-index: 1;
+}
+
+.inicio > p {
+    line-height: 1.7;
+    color: var(--gris);
+    max-width: 570px;
+    margin: 15px auto 25px;
+}
+
+.formulario {
+    text-align: left;
+    max-width: 540px;
+    margin: auto;
+}
+
+.formulario label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.formulario input {
+    width: 100%;
+    border: 1px solid #cbd7e3;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+.formulario input:focus {
+    border-color: var(--azul2);
+    box-shadow: 0 0 0 3px rgba(35,109,169,.12);
+}
+
+.grupo {
+    margin-top: 15px;
+    background: var(--azul-claro);
+    border-radius: 8px;
+    padding: 13px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.grupo strong {
+    color: var(--azul);
+}
+
+.datos-examen {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.dato {
+    background: #f3f7fb;
+    padding: 17px 8px;
+    border-radius: 10px;
+    border-bottom: 3px solid var(--naranja);
+}
+
+.dato strong {
+    display: block;
+    font-size: 26px;
+    color: var(--azul);
+}
+
+.dato span {
+    display: block;
+    font-size: 12px;
+    color: var(--gris);
+    margin-top: 5px;
+}
+
+.aviso-inicio {
+    color: var(--gris);
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: center;
+    margin: 18px 0;
+}
+
+/* =====================================
+   BOTONES
+===================================== */
+
+.boton {
+    border: none;
+    border-radius: 8px;
+    padding: 13px 22px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.boton-azul {
+    background: var(--azul2);
+    color: white;
+}
+
+.boton-azul:hover {
+    background: var(--azul);
+    transform: translateY(-1px);
+}
+
+.boton-naranja {
+    background: var(--naranja);
+    color: #26384b;
+}
+
+.boton-naranja:hover {
+    background: #e79428;
+}
+
+.boton-gris {
+    background: #e9eff5;
+    color: var(--azul);
+}
+
+.boton-gris:hover {
+    background: #dce7f1;
+}
+
+.boton-rojo {
+    background: var(--rojo);
+    color: white;
+}
+
+.boton-rojo:hover {
+    background: #c94e34;
+}
+
+.boton-bloque {
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* =====================================
+   PANTALLA DEL EXAMEN
+===================================== */
+
+.datos-superiores {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.datos-superiores h2 {
+    color: var(--azul);
+    font-size: 21px;
+    margin: 0 0 7px;
+}
+
+.datos-superiores p {
+    color: var(--gris);
+    margin: 0;
+    font-size: 13px;
+}
+
+.reloj {
+    background: #fff3e9;
+    border: 1px solid #f5d9c5;
+    border-radius: 10px;
+    padding: 12px 18px;
+    text-align: center;
+    min-width: 125px;
+}
+
+.reloj span {
+    display: block;
+    color: #a65a32;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.reloj strong {
+    display: block;
+    color: #c65332;
+    font-size: 25px;
+    margin-top: 4px;
+}
+
+.reloj.alerta {
+    background: #ffe1db;
+    animation: alerta 1s infinite alternate;
+}
+
+@keyframes alerta {
+    to { opacity: .65; }
+}
+
+/* =====================================
+   PROGRESO
+===================================== */
+
+.progreso-contenedor {
+    margin: 20px 0;
+}
+
+.progreso-texto {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--gris);
+    margin-bottom: 8px;
+}
+
+.progreso-fondo {
+    height: 10px;
+    background: #dce5ee;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progreso-barra {
+    width: 0%;
+    height: 100%;
+    background: var(--naranja);
+    transition: width .3s;
+}
+
+/* =====================================
+   NAVEGACIÓN NUMÉRICA
+===================================== */
+
+.navegacion-numeros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.numero-pregunta {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+    background: white;
+    color: var(--azul);
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.numero-pregunta.activa {
+    background: var(--azul);
+    color: white;
+    border-color: var(--azul);
+}
+
+.numero-pregunta.contestada {
+    border: 2px solid var(--verde);
+}
+
+.numero-pregunta.activa.contestada {
+    background: var(--azul);
+    border-color: var(--verde);
+    color: white;
+}
+
+/* =====================================
+   PREGUNTAS
+===================================== */
+
+.pregunta {
+    min-height: 330px;
+}
+
+.etiquetas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.etiqueta {
+    background: var(--azul-claro);
+    color: var(--azul);
+    border-radius: 20px;
+    padding: 8px 13px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.etiqueta-puntos {
+    background: #fff3e3;
+    color: #9b6220;
+}
+
+.texto-pregunta {
+    font-size: 21px;
+    line-height: 1.5;
+    color: #26384b;
+    margin: 15px 0 25px;
+}
+
+.instruccion {
+    color: var(--gris);
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.opciones {
+    display: grid;
+    gap: 12px;
+}
+
+.opcion {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    border: 1px solid var(--borde);
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s;
+    line-height: 1.45;
+    background: white;
+}
+
+.opcion:hover {
+    border-color: #8ab5db;
+    background: #f5f9fe;
+}
+
+.opcion.seleccionada {
+    border: 2px solid var(--azul2);
+    background: #edf5fd;
+}
+
+.opcion input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--azul2);
+    flex-shrink: 0;
+}
+
+.letra-opcion {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #edf2f7;
+    color: var(--azul);
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.navegacion-botones {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+}
+
+.ayuda-examen {
+    margin-top: 15px;
+    color: var(--gris);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* =====================================
+   RESULTADOS
+===================================== */
+
+.resultado-portada {
+    background: linear-gradient(120deg, #174b83, #2879b7);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 13px;
+    margin-bottom: 20px;
+}
+
+.resultado-portada h2 {
+    color: white;
+    margin: 10px 0;
+}
+
+.resultado-portada p {
+    color: #eaf3fc;
+}
+
+.resultado-portada .logo-resultados {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    background: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.puntos-grandes {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.puntos-grandes strong {
+    font-size: 60px;
+    color: white;
+}
+
+.puntos-grandes span {
+    font-size: 15px;
+    color: #eaf3fc;
+}
+
+.estadisticas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-bottom: 20px;
+}
+
+.estadistica {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.estadistica span {
+    display: block;
+    font-size: 13px;
+    color: var(--gris);
+}
+
+.estadistica strong {
+    display: block;
+    font-size: 30px;
+    color: var(--azul);
+    margin-top: 8px;
+}
+
+.titulo-seccion {
+    color: var(--azul);
+    font-size: 19px;
+    margin: 0 0 18px;
+}
+
+.modulo-resultado {
+    padding: 16px;
+    border-radius: 9px;
+    background: #f3f7fb;
+    margin: 12px 0;
+    border-left: 4px solid var(--naranja);
+}
+
+.modulo-resultado strong {
+    color: var(--azul);
+}
+
+.modulo-resultado p {
+    font-size: 13px;
+    color: var(--gris);
+    margin: 7px 0;
+}
+
+.revision {
+    border-radius: 9px;
+    padding: 16px;
+    margin: 12px 0;
+    line-height: 1.5;
+}
+
+.revision.correcta {
+    background: #edf8f0;
+    border-left: 5px solid var(--verde);
+}
+
+.revision.incorrecta {
+    background: #fff1ed;
+    border-left: 5px solid var(--rojo);
+}
+
+.revision strong {
+    display: block;
+    margin-bottom: 7px;
+}
+
+.revision p {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.aviso-moodle {
+    background: #edf5ff;
+    border: 1px solid #cddff0;
+    border-left: 5px solid var(--azul2);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.aviso-moodle h3 {
+    margin: 0 0 8px;
+    color: var(--azul);
+}
+
+.acciones-resultados {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+/* =====================================
+   PIE DE PÁGINA
+===================================== */
+
+footer {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    color: #77899b;
+    font-size: 11px;
+    border-top: 1px solid var(--borde);
+}
+
+/* =====================================
+   RESPONSIVO
+===================================== */
+
+@media (max-width: 650px) {
+
+    .encabezado {
+        padding: 12px;
+        min-height: 90px;
+        gap: 10px;
+    }
+
+    .logo-curso {
+        width: 58px;
+        height: 58px;
+    }
+
+    .titulo-encabezado h1 {
+        font-size: 16px;
+    }
+
+    .titulo-encabezado p {
+        font-size: 11px;
+    }
+
+    .contenedor {
+        width: 94%;
+        margin: 18px auto;
+    }
+
+    .tarjeta {
+        padding: 18px;
+    }
+
+    .portada {
+        margin: -18px -18px 20px;
+    }
+
+    .portada h2 {
+        font-size: 21px;
+    }
+
+    .datos-superiores {
+        align-items: flex-start;
+    }
+
+    .datos-superiores h2 {
+        font-size: 17px;
+    }
+
+    .reloj {
+        min-width: 100px;
+        padding: 9px;
+    }
+
+    .reloj strong {
+        font-size: 20px;
+    }
+
+    .texto-pregunta {
+        font-size: 18px;
+    }
+
+    .estadisticas {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .navegacion-botones {
+        flex-direction: column;
+    }
+
+    .navegacion-botones button,
+    .acciones-resultados button {
+        width: 100%;
+    }
+}
+
+/* =====================================
+   IMPRESIÓN
+===================================== */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .encabezado,
+    footer,
+    .acciones-resultados,
+    .aviso-moodle {
+        display: none !important;
+    }
+
+    .contenedor {
+        width: 100%;
+        margin: 0;
+    }
+
+    .tarjeta {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    #resultados {
+        display: block !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================
+     ENCABEZADO
+===================================== -->
+
+<header class="encabezado">
+
+    <img
+        src="./img/c3cfebf3-f346-4060-aee7-626abc96c8a9.png"
+        alt="Logo del curso"
+        class="logo-curso"
+    >
+
+    <div class="titulo-encabezado">
+        <h1>MATEMÁTICAS EN ACCIÓN</h1>
+        <p>Evaluación final del curso · Cuarto grado</p>
+    </div>
+
+</header>
+
+
+<main class="contenedor">
+
+<!-- =====================================
+     PANTALLA DE INICIO
+===================================== -->
+
+<section id="inicio" class="inicio tarjeta">
+
+    <div class="portada">
+        <div class="portada-simbolos">＋ − × ÷</div>
+        <h2>Evaluación final</h2>
+        <p>¡Demuestra todo lo que aprendiste!</p>
+    </div>
+
+    <h2>Bienvenido a tu evaluación</h2>
+
+    <p>
+        En esta evaluación pondrás en práctica los conocimientos
+        que desarrollaste durante los tres módulos de Matemáticas
+        en Acción. Lee con atención cada pregunta y selecciona
+        la respuesta que consideres correcta.
+    </p>
+
+    <form id="formulario" class="formulario">
+
+        <label for="nombre">Nombre y apellidos del estudiante</label>
+
+        <input
+            type="text"
+            id="nombre"
+            placeholder="Escribe tu nombre completo"
+            maxlength="100"
+            required
+        >
+
+        <div class="grupo">
+            <span>Grupo</span>
+            <strong>Cuarto</strong>
+        </div>
+
+        <div class="datos-examen">
+
+            <div class="dato">
+                <strong>20</strong>
+                <span>Preguntas</span>
+            </div>
+
+            <div class="dato">
+                <strong>30</strong>
+                <span>Puntos</span>
+            </div>
+
+            <div class="dato">
+                <strong>30</strong>
+                <span>Minutos</span>
+            </div>
+
+        </div>
+
+        <p class="aviso-inicio">
+            Cada pregunta vale 1.5 puntos. Puedes regresar a las preguntas
+            anteriores y modificar tus respuestas antes de finalizar.
+            Al terminar, podrás consultar tu resultado y descargar tu reporte.
+        </p>
+
+        <button type="submit" class="boton boton-azul boton-bloque">
+            COMENZAR EXAMEN →
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- =====================================
+     PANTALLA DEL EXAMEN
+===================================== -->
+
+<section id="examen" class="oculto">
+
+    <div class="tarjeta datos-superiores">
+
+        <div>
+            <h2>Evaluación final</h2>
+            <p id="saludo"></p>
+        </div>
+
+        <div class="reloj" id="contenedorReloj">
+            <span>TIEMPO RESTANTE</span>
+            <strong id="tiempo">30:00</strong>
+        </div>
+
+    </div>
+
+    <div class="progreso-contenedor">
+
+        <div class="progreso-texto">
+            <span id="respondidas">0 de 20 respondidas</span>
+            <strong id="porcentaje">0%</strong>
+        </div>
+
+        <div class="progreso-fondo">
+            <div class="progreso-barra" id="barra"></div>
+        </div>
+
+    </div>
+
+    <div class="tarjeta">
+
+        <h3 class="titulo-seccion">Navegación de preguntas</h3>
+
+        <div class="navegacion-numeros" id="navegacionNumeros"></div>
+
+        <p class="ayuda-examen">
+            Los números verdes indican preguntas contestadas.
+            Selecciona cualquier número para ir directamente a esa pregunta.
+        </p>
+
+    </div>
+
+    <div class="tarjeta pregunta">
+
+        <div class="etiquetas">
+            <span class="etiqueta" id="numeroPregunta">PREGUNTA 1 DE 20</span>
+            <span class="etiqueta" id="moduloPregunta">MÓDULO 1</span>
+            <span class="etiqueta etiqueta-puntos">1.5 PUNTOS</span>
+        </div>
+
+        <p class="instruccion">
+            Selecciona una sola respuesta.
+        </p>
+
+        <h2 class="texto-pregunta" id="textoPregunta"></h2>
+
+        <div class="opciones" id="opciones"></div>
+
+        <p id="mensajeSeleccion" class="ayuda-examen"></p>
+
+        <div class="navegacion-botones">
+
+            <button
+                type="button"
+                id="anterior"
+                class="boton boton-gris"
+            >
+                ← ANTERIOR
+            </button>
+
+            <button
+                type="button"
+                id="siguiente"
+                class="boton boton-azul"
+            >
+                SIGUIENTE →
+            </button>
+
+            <button
+                type="button"
+                id="finalizar"
+                class="boton boton-rojo oculto"
+            >
+                FINALIZAR EXAMEN
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="tarjeta">
+        <strong>Antes de finalizar:</strong>
+        revisa que hayas contestado todas las preguntas.
+        Podrás regresar a cualquiera de ellas mientras el examen siga activo.
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     PANTALLA DE RESULTADOS
+===================================== -->
+
+<section id="resultados" class="oculto">
+
+    <div class="resultado-portada">
+
+        <img
+            src="./img/c3cfebf3-f346-4060-aee7-626abc96c8a9.png"
+            alt="Logo del curso"
+            class="logo-resultados"
+        >
+
+        <h2>¡Has terminado tu evaluación!</h2>
+
+        <p id="mensajeFinal"></p>
+
+        <div class="puntos-grandes">
+            <strong id="puntosFinales">0</strong>
+            <span>/ 30 puntos</span>
+        </div>
+
+        <h3 id="porcentajeFinal" style="color:white;"></h3>
+
+        <p id="nombreResultado"></p>
+
+    </div>
+
+    <div class="estadisticas">
+
+        <div class="tarjeta estadistica">
+            <span>Respuestas correctas</span>
+            <strong id="correctas">0</strong>
+        </div>
+
+        <div class="tarjeta estadistica">
+            <span>Respuestas incorrectas</span>
+            <strong id="incorrectas">0</strong>
+        </div>
+
+        <div class="tarjeta estadistica">
+            <span>Sin responder</span>
+            <strong id="sinResponder">0</strong>
+        </div>
+
+    </div>
+
+    <div class="tarjeta">
+
+        <h3 class="titulo-seccion">Resultados por módulo</h3>
+
+        <div id="resultadosModulos"></div>
+
+    </div>
+
+    <div class="tarjeta">
+
+        <h3 class="titulo-seccion">Retroalimentación general</h3>
+
+        <p id="retroalimentacion"></p>
+
+        <div id="retroModulos"></div>
+
+    </div>
+
+    <div class="tarjeta">
+
+        <h3 class="titulo-seccion">Revisión de respuestas</h3>
+
+        <p class="ayuda-examen">
+            Consulta qué respondiste, cuál era la respuesta correcta
+            y una explicación breve de cada ejercicio.
+        </p>
+
+        <div id="revision"></div>
+
+    </div>
+
+    <div class="aviso-moodle">
+
+        <h3>📄 ¡Último paso!</h3>
+
+        <p>
+            Descarga tu reporte de resultados en formato PDF.
+            Después, debes subir este documento a la actividad
+            correspondiente de la plataforma Moodle.
+        </p>
+
+        <strong>Formato de entrega: PDF</strong>
+
+    </div>
+
+    <div class="acciones-resultados">
+
+        <button
+            type="button"
+            id="descargar"
+            class="boton boton-azul"
+        >
+            DESCARGAR REPORTE PDF
+        </button>
+
+        <button
+            type="button"
+            id="imprimir"
+            class="boton boton-gris"
+        >
+            IMPRIMIR RESULTADOS
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+    MATEMÁTICAS EN ACCIÓN · EVALUACIÓN FINAL · CUARTO GRADO
+</footer>
+
+
+<script>
+"use strict";
+
+/* ==========================================
+   BANCO DE 20 PREGUNTAS
+========================================== */
+
+const preguntas = [
+
+    // MÓDULO 1: VALOR POSICIONAL Y SISTEMA DE NUMERACIÓN
+
+    {
+        modulo: 1,
+        nombre: "Valor posicional y sistema de numeración",
+        pregunta: "¿Qué valor representa el número 6 en 3,642?",
+        opciones: ["6 unidades", "6 centenas", "6 decenas"],
+        correcta: 1,
+        explicacion: "El 6 ocupa el lugar de las centenas, por eso representa 600."
+    },
+    {
+        modulo: 1,
+        nombre: "Valor posicional y sistema de numeración",
+        pregunta: "¿Cómo se escribe con palabras el número 2,405?",
+        opciones: [
+            "Dos mil cuatrocientos cinco",
+            "Dos mil cuarenta y cinco",
+            "Doscientos cuatro mil cinco"
+        ],
+        correcta: 0,
+        explicacion: "2,405 se lee dos mil cuatrocientos cinco."
+    },
+    {
+        modulo: 1,
+        nombre: "Valor posicional y sistema de numeración",
+        pregunta: "¿Cuál es la descomposición correcta de 4,328?",
+        opciones: [
+            "4,000 + 300 + 20 + 8",
+            "400 + 30 + 20 + 8",
+            "4,000 + 30 + 200 + 8"
+        ],
+        correcta: 0,
+        explicacion: "Son 4 unidades de millar, 3 centenas, 2 decenas y 8 unidades."
+    },
+    {
+        modulo: 1,
+        nombre: "Valor posicional y sistema de numeración",
+        pregunta: "¿Qué signo completa correctamente la comparación? 587 ___ 578",
+        opciones: ["<", ">", "="],
+        correcta: 1,
+        explicacion: "587 es mayor que 578, por eso se utiliza el signo >."
+    },
+    {
+        modulo: 1,
+        nombre: "Valor posicional y sistema de numeración",
+        pregunta: "¿Cuál es el orden ascendente correcto?",
+        opciones: [
+            "125, 215, 251, 512",
+            "512, 251, 215, 125",
+            "215, 125, 512, 251"
+        ],
+        correcta: 0,
+        explicacion: "El orden ascendente va del número menor al mayor."
+    },
+
+    // MÓDULO 2: OPERACIONES BÁSICAS Y FRACCIONES
+
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "¿Cuál es el resultado de 348 + 126?",
+        opciones: ["464", "474", "484"],
+        correcta: 1,
+        explicacion: "348 + 126 = 474."
+    },
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "¿Cuál es el resultado de 625 - 283?",
+        opciones: ["342", "352", "332"],
+        correcta: 0,
+        explicacion: "625 - 283 = 342."
+    },
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "¿Cuánto es 8 × 7?",
+        opciones: ["54", "56", "64"],
+        correcta: 1,
+        explicacion: "8 multiplicado por 7 es igual a 56."
+    },
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "¿Cuál es el resultado de 81 ÷ 9?",
+        opciones: ["8", "9", "10"],
+        correcta: 1,
+        explicacion: "81 dividido entre 9 es igual a 9."
+    },
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "En la fracción 3/5, ¿qué representa el número 3?",
+        opciones: ["El denominador", "El numerador", "El resultado"],
+        correcta: 1,
+        explicacion: "El numerador es el número que se encuentra arriba de la línea de fracción."
+    },
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "¿Qué fracción representa la mitad de una unidad?",
+        opciones: ["1/2", "1/3", "1/4"],
+        correcta: 0,
+        explicacion: "La mitad se representa con la fracción 1/2."
+    },
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "¿Cuál de estas fracciones es equivalente a 1/2?",
+        opciones: ["2/4", "1/3", "3/5"],
+        correcta: 0,
+        explicacion: "1/2 y 2/4 representan la misma cantidad."
+    },
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "¿Cuánto es 2/7 + 3/7?",
+        opciones: ["5/7", "5/14", "6/7"],
+        correcta: 0,
+        explicacion: "Se suman los numeradores y se conserva el denominador: 5/7."
+    },
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "¿Cuánto es 6/8 - 2/8?",
+        opciones: ["4/8", "8/8", "4/16"],
+        correcta: 0,
+        explicacion: "Se restan los numeradores y se conserva el denominador: 4/8."
+    },
+    {
+        modulo: 2,
+        nombre: "Operaciones básicas y fracciones",
+        pregunta: "Una caja tiene 4 bolsas con 6 lápices cada una. ¿Cuántos lápices hay en total?",
+        opciones: ["10 lápices", "20 lápices", "24 lápices"],
+        correcta: 2,
+        explicacion: "4 × 6 = 24 lápices."
+    },
+
+    // MÓDULO 3: FIGURAS GEOMÉTRICAS
+
+    {
+        modulo: 3,
+        nombre: "Figuras geométricas",
+        pregunta: "¿Cuántos lados tiene un triángulo?",
+        opciones: ["3 lados", "4 lados", "5 lados"],
+        correcta: 0,
+        explicacion: "Un triángulo tiene tres lados."
+    },
+    {
+        modulo: 3,
+        nombre: "Figuras geométricas",
+        pregunta: "¿Cómo se llama el punto donde se unen dos lados de una figura?",
+        opciones: ["Ángulo", "Vértice", "Centro"],
+        correcta: 1,
+        explicacion: "El vértice es el punto donde se unen dos lados."
+    },
+    {
+        modulo: 3,
+        nombre: "Figuras geométricas",
+        pregunta: "¿Cuál es el perímetro de un cuadrado que mide 5 cm por lado?",
+        opciones: ["10 cm", "20 cm", "25 cm"],
+        correcta: 1,
+        explicacion: "5 + 5 + 5 + 5 = 20 cm."
+    },
+    {
+        modulo: 3,
+        nombre: "Figuras geométricas",
+        pregunta: "¿Cuál es el área de un rectángulo de 6 cm de largo y 4 cm de ancho?",
+        opciones: ["20 cm²", "24 cm²", "10 cm²"],
+        correcta: 1,
+        explicacion: "El área es largo por ancho: 6 × 4 = 24 cm²."
+    },
+    {
+        modulo: 3,
+        nombre: "Figuras geométricas",
+        pregunta: "¿En qué unidad se expresa normalmente el área de una figura?",
+        opciones: ["Centímetros", "Centímetros cuadrados", "Kilogramos"],
+        correcta: 1,
+        explicacion: "El área se expresa en unidades cuadradas, como cm² o m²."
+    }
+
+];
+
+
+/* ==========================================
+   VARIABLES
+========================================== */
+
+const TOTAL = 20;
+const VALOR = 1.5;
+
+let indiceActual = 0;
+let respuestas = Array(TOTAL).fill(null);
+let nombreEstudiante = "";
+let tiempoRestante = 30 * 60;
+let reloj = null;
+let terminado = false;
+
+
+/* ==========================================
+   ELEMENTOS
+========================================== */
+
+const inicio = document.getElementById("inicio");
+const examen = document.getElementById("examen");
+const resultados = document.getElementById("resultados");
+
+const formulario = document.getElementById("formulario");
+
+const textoPregunta = document.getElementById("textoPregunta");
+const opciones = document.getElementById("opciones");
+
+const btnAnterior = document.getElementById("anterior");
+const btnSiguiente = document.getElementById("siguiente");
+const btnFinalizar = document.getElementById("finalizar");
+
+
+/* ==========================================
+   COMPROBAR PREGUNTAS
+========================================== */
+
+if (preguntas.length !== TOTAL) {
+    console.error("El examen no contiene exactamente 20 preguntas.");
+}
+
+
+/* ==========================================
+   INICIAR
+========================================== */
+
+formulario.addEventListener("submit", function(evento) {
+
+    evento.preventDefault();
+
+    const campoNombre = document.getElementById("nombre");
+
+    nombreEstudiante = campoNombre.value.trim();
+
+    if (nombreEstudiante.length < 3) {
+        alert("Escribe tu nombre y apellidos para comenzar.");
+        campoNombre.focus();
+        return;
+    }
+
+    inicio.classList.add("oculto");
+    examen.classList.remove("oculto");
+
+    document.getElementById("saludo").textContent =
+        "Estudiante: " + nombreEstudiante;
+
+    crearNavegacion();
+    mostrarPregunta();
+    iniciarReloj();
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+});
+
+
+/* ==========================================
+   CREAR NAVEGACIÓN DE LAS 20 PREGUNTAS
+========================================== */
+
+function crearNavegacion() {
+
+    const contenedor = document.getElementById("navegacionNumeros");
+
+    contenedor.innerHTML = "";
+
+    preguntas.forEach(function(pregunta, i) {
+
+        const boton = document.createElement("button");
+
+        boton.type = "button";
+        boton.className = "numero-pregunta";
+        boton.textContent = i + 1;
+        boton.setAttribute("aria-label", "Ir a pregunta " + (i + 1));
+
+        boton.addEventListener("click", function() {
+
+            if (terminado) return;
+
+            indiceActual = i;
+            mostrarPregunta();
+
+        });
+
+        contenedor.appendChild(boton);
+
+    });
+
+    actualizarNavegacion();
+
+}
+
+
+/* ==========================================
+   ACTUALIZAR NAVEGACIÓN
+========================================== */
+
+function actualizarNavegacion() {
+
+    const botones = document.querySelectorAll(".numero-pregunta");
+
+    botones.forEach(function(boton, i) {
+
+        boton.classList.toggle("activa", i === indiceActual);
+
+        boton.classList.toggle(
+            "contestada",
+            respuestas[i] !== null
+        );
+
+    });
+
+}
+
+
+/* ==========================================
+   MOSTRAR PREGUNTA ACTUAL
+========================================== */
+
+function mostrarPregunta() {
+
+    const pregunta = preguntas[indiceActual];
+
+    document.getElementById("numeroPregunta").textContent =
+        "PREGUNTA " + (indiceActual + 1) + " DE " + TOTAL;
+
+    document.getElementById("moduloPregunta").textContent =
+        "MÓDULO " + pregunta.modulo + " · " + pregunta.nombre;
+
+    textoPregunta.textContent = pregunta.pregunta;
+
+    opciones.innerHTML = "";
+
+    document.getElementById("mensajeSeleccion").textContent =
+        respuestas[indiceActual] === null
+            ? "Todavía no has seleccionado una respuesta."
+            : "Tu respuesta está guardada.";
+
+    pregunta.opciones.forEach(function(opcion, i) {
+
+        const etiqueta = document.createElement("label");
+
+        etiqueta.className = "opcion";
+
+        if (respuestas[indiceActual] === i) {
+            etiqueta.classList.add("seleccionada");
+        }
+
+        const radio = document.createElement("input");
+
+        radio.type = "radio";
+        radio.name = "respuesta";
+        radio.value = i;
+
+        radio.checked = respuestas[indiceActual] === i;
+
+        const letra = document.createElement("span");
+
+        letra.className = "letra-opcion";
+        letra.textContent = String.fromCharCode(65 + i);
+
+        const texto = document.createElement("span");
+
+        texto.textContent = opcion;
+
+        radio.addEventListener("change", function() {
+
+            respuestas[indiceActual] = i;
+
+            document.querySelectorAll(".opcion").forEach(function(elemento) {
+                elemento.classList.remove("seleccionada");
+            });
+
+            etiqueta.classList.add("seleccionada");
+
+            document.getElementById("mensajeSeleccion").textContent =
+                "Respuesta guardada correctamente.";
+
+            actualizarProgreso();
+            actualizarNavegacion();
+
+        });
+
+        etiqueta.appendChild(radio);
+        etiqueta.appendChild(letra);
+        etiqueta.appendChild(texto);
+
+        opciones.appendChild(etiqueta);
+
+    });
+
+    btnAnterior.disabled = indiceActual === 0;
+
+    if (indiceActual === TOTAL - 1) {
+
+        btnSiguiente.classList.add("oculto");
+        btnFinalizar.classList.remove("oculto");
+
+    } else {
+
+        btnSiguiente.classList.remove("oculto");
+        btnFinalizar.classList.add("oculto");
+
+    }
+
+    actualizarProgreso();
+    actualizarNavegacion();
+
+}
+
+
+/* ==========================================
+   PROGRESO
+========================================== */
+
+function actualizarProgreso() {
+
+    const contestadas = respuestas.filter(
+        respuesta => respuesta !== null
+    ).length;
+
+    const porcentaje = Math.round(
+        contestadas / TOTAL * 100
+    );
+
+    document.getElementById("respondidas").textContent =
+        contestadas + " de " + TOTAL + " respondidas";
+
+    document.getElementById("porcentaje").textContent =
+        porcentaje + "%";
+
+    document.getElementById("barra").style.width =
+        porcentaje + "%";
+
+}
+
+
+/* ==========================================
+   ANTERIOR Y SIGUIENTE
+========================================== */
+
+btnAnterior.addEventListener("click", function() {
+
+    if (indiceActual > 0) {
+
+        indiceActual--;
+
+        mostrarPregunta();
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+    }
+
+});
+
+
+btnSiguiente.addEventListener("click", function() {
+
+    if (respuestas[indiceActual] === null) {
+
+        document.getElementById("mensajeSeleccion").textContent =
+            "Selecciona una respuesta antes de continuar.";
+
+        return;
+
+    }
+
+    if (indiceActual < TOTAL - 1) {
+
+        indiceActual++;
+
+        mostrarPregunta();
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+    }
+
+});
+
+
+/* ==========================================
+   TEMPORIZADOR
+========================================== */
+
+function iniciarReloj() {
+
+    clearInterval(reloj);
+
+    actualizarReloj();
+
+    reloj = setInterval(function() {
+
+        tiempoRestante--;
+
+        actualizarReloj();
+
+        if (tiempoRestante <= 0) {
+
+            clearInterval(reloj);
+
+            finalizarExamen(true);
+
+        }
+
+    }, 1000);
+
+}
+
+
+function actualizarReloj() {
+
+    const minutos = Math.floor(tiempoRestante / 60);
+    const segundos = tiempoRestante % 60;
+
+    document.getElementById("tiempo").textContent =
+        String(minutos).padStart(2, "0") + ":" +
+        String(segundos).padStart(2, "0");
+
+    if (tiempoRestante <= 300) {
+
+        document.getElementById("contenedorReloj")
+            .classList.add("alerta");
+
+    }
+
+}
+
+
+/* ==========================================
+   FINALIZAR
+========================================== */
+
+btnFinalizar.addEventListener("click", function() {
+
+    const pendientes = respuestas.filter(
+        respuesta => respuesta === null
+    ).length;
+
+    if (pendientes > 0) {
+
+        const confirmar = confirm(
+            "Tienes " + pendientes +
+            " preguntas sin responder. ¿Deseas finalizar el examen?"
+        );
+
+        if (!confirmar) return;
+
+    } else {
+
+        const confirmar = confirm(
+            "¿Estás seguro de que deseas finalizar tu evaluación?"
+        );
+
+        if (!confirmar) return;
+
+    }
+
+    finalizarExamen(false);
+
+});
+
+
+function finalizarExamen(porTiempo) {
+
+    if (terminado) return;
+
+    terminado = true;
+
+    clearInterval(reloj);
+
+    examen.classList.add("oculto");
+    resultados.classList.remove("oculto");
+
+    calcularResultados();
+
+    if (porTiempo) {
+
+        document.getElementById("mensajeFinal").textContent =
+            "El tiempo terminó. Se calificaron las respuestas que guardaste.";
+
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+}
+
+
+/* ==========================================
+   CALIFICACIÓN
+========================================== */
+
+function contarResultados() {
+
+    let correctas = 0;
+    let incorrectas = 0;
+    let sinResponder = 0;
+
+    preguntas.forEach(function(pregunta, i) {
+
+        if (respuestas[i] === null) {
+
+            sinResponder++;
+
+        } else if (respuestas[i] === pregunta.correcta) {
+
+            correctas++;
+
+        } else {
+
+            incorrectas++;
+
+        }
+
+    });
+
+    return {
+        correctas,
+        incorrectas,
+        sinResponder,
+        puntos: correctas * VALOR,
+        porcentaje: Math.round(correctas / TOTAL * 100)
+    };
+
+}
+
+
+function calcularResultados() {
+
+    const datos = contarResultados();
+
+    document.getElementById("correctas").textContent =
+        datos.correctas;
+
+    document.getElementById("incorrectas").textContent =
+        datos.incorrectas;
+
+    document.getElementById("sinResponder").textContent =
+        datos.sinResponder;
+
+    document.getElementById("puntosFinales").textContent =
+        datos.puntos.toFixed(1);
+
+    document.getElementById("porcentajeFinal").textContent =
+        datos.porcentaje + "% de aciertos";
+
+    document.getElementById("nombreResultado").textContent =
+        "Estudiante: " + nombreEstudiante + " · Grupo: Cuarto";
+
+    if (datos.porcentaje >= 90) {
+
+        document.getElementById("mensajeFinal").textContent =
+            "¡Excelente trabajo! Demostraste un gran dominio de los contenidos.";
+
+    } else if (datos.porcentaje >= 70) {
+
+        document.getElementById("mensajeFinal").textContent =
+            "¡Muy bien! Has conseguido buenos resultados. Sigue practicando.";
+
+    } else if (datos.porcentaje >= 60) {
+
+        document.getElementById("mensajeFinal").textContent =
+            "Buen esfuerzo. Continúa repasando para fortalecer tus conocimientos.";
+
+    } else {
+
+        document.getElementById("mensajeFinal").textContent =
+            "Has terminado tu evaluación. Repasa los temas y continúa practicando.";
+
+    }
+
+    mostrarResultadosModulos();
+    mostrarRetroalimentacion();
+    mostrarRevision();
+
+}
+
+
+/* ==========================================
+   RESULTADOS POR MÓDULO
+========================================== */
+
+function datosModulos() {
+
+    const datos = {
+        1: {
+            nombre: "Módulo 1. Valor posicional y sistema de numeración",
+            total: 0,
+            correctas: 0
+        },
+        2: {
+            nombre: "Módulo 2. Operaciones básicas y fracciones",
+            total: 0,
+            correctas: 0
+        },
+        3: {
+            nombre: "Módulo 3. Figuras geométricas",
+            total: 0,
+            correctas: 0
+        }
+    };
+
+    preguntas.forEach(function(pregunta, i) {
+
+        datos[pregunta.modulo].total++;
+
+        if (respuestas[i] === pregunta.correcta) {
+            datos[pregunta.modulo].correctas++;
+        }
+
+    });
+
+    return datos;
+
+}
+
+
+function mostrarResultadosModulos() {
+
+    const contenedor = document.getElementById("resultadosModulos");
+
+    contenedor.innerHTML = "";
+
+    const datos = datosModulos();
+
+    Object.values(datos).forEach(function(modulo) {
+
+        const porcentaje = Math.round(
+            modulo.correctas / modulo.total * 100
+        );
+
+        const div = document.createElement("div");
+
+        div.className = "modulo-resultado";
+
+        const titulo = document.createElement("strong");
+        titulo.textContent = modulo.nombre;
+
+        const aciertos = document.createElement("p");
+        aciertos.textContent =
+            "Respuestas correctas: " + modulo.correctas +
+            " de " + modulo.total;
+
+        const puntos = document.createElement("p");
+        puntos.textContent =
+            "Puntos obtenidos: " +
+            (modulo.correctas * VALOR).toFixed(1);
+
+        const avance = document.createElement("p");
+        avance.textContent = "Porcentaje: " + porcentaje + "%";
+
+        div.appendChild(titulo);
+        div.appendChild(aciertos);
+        div.appendChild(puntos);
+        div.appendChild(avance);
+
+        contenedor.appendChild(div);
+
+    });
+
+}
+
+
+/* ==========================================
+   RETROALIMENTACIÓN
+========================================== */
+
+function mostrarRetroalimentacion() {
+
+    const datos = contarResultados();
+
+    let mensaje = "";
+
+    if (datos.correctas >= 18) {
+
+        mensaje =
+            "El estudiante demuestra un excelente dominio de los contenidos evaluados. Se recomienda continuar resolviendo ejercicios para mantener sus habilidades.";
+
+    } else if (datos.correctas >= 14) {
+
+        mensaje =
+            "El estudiante presenta un buen avance en los contenidos. Es conveniente practicar los ejercicios que presentaron dificultad.";
+
+    } else if (datos.correctas >= 10) {
+
+        mensaje =
+            "El estudiante necesita reforzar algunos aprendizajes. Se recomienda repasar las explicaciones y resolver más ejercicios.";
+
+    } else {
+
+        mensaje =
+            "Es importante retomar los contenidos de los tres módulos y realizar actividades de práctica para fortalecer los conocimientos matemáticos.";
+
+    }
+
+    document.getElementById("retroalimentacion").textContent = mensaje;
+
+    const contenedor = document.getElementById("retroModulos");
+
+    contenedor.innerHTML = "";
+
+    const datosPorModulo = datosModulos();
+
+    Object.values(datosPorModulo).forEach(function(modulo) {
+
+        let comentario = "";
+
+        if (modulo.correctas === modulo.total) {
+
+            comentario = "Excelente dominio de este módulo.";
+
+        } else if (modulo.correctas >= Math.ceil(modulo.total / 2)) {
+
+            comentario = "Buen avance. Conviene practicar los contenidos que presentaron dificultad.";
+
+        } else {
+
+            comentario = "Se recomienda repasar los contenidos y resolver ejercicios adicionales.";
+
+        }
+
+        const div = document.createElement("div");
+        div.className = "modulo-resultado";
+
+        const titulo = document.createElement("strong");
+        titulo.textContent = modulo.nombre;
+
+        const texto = document.createElement("p");
+        texto.textContent = comentario;
+
+        div.appendChild(titulo);
+        div.appendChild(texto);
+
+        contenedor.appendChild(div);
+
+    });
+
+}
+
+
+/* ==========================================
+   REVISIÓN DE RESPUESTAS
+========================================== */
+
+function mostrarRevision() {
+
+    const contenedor = document.getElementById("revision");
+
+    contenedor.innerHTML = "";
+
+    preguntas.forEach(function(pregunta, i) {
+
+        const esCorrecta =
+            respuestas[i] === pregunta.correcta;
+
+        const div = document.createElement("div");
+
+        div.className = esCorrecta
+            ? "revision correcta"
+            : "revision incorrecta";
+
+        const titulo = document.createElement("strong");
+        titulo.textContent =
+            (i + 1) + ". " + pregunta.pregunta;
+
+        const respuestaAlumno = document.createElement("p");
+
+        respuestaAlumno.textContent =
+            "Tu respuesta: " +
+            (respuestas[i] === null
+                ? "Sin responder"
+                : pregunta.opciones[respuestas[i]]);
+
+        const respuestaCorrecta = document.createElement("p");
+
+        respuestaCorrecta.textContent =
+            "Respuesta correcta: " + pregunta.opciones[pregunta.correcta];
+
+        const explicacion = document.createElement("p");
+
+        explicacion.textContent =
+            "Explicación: " + pregunta.explicacion;
+
+        const estado = document.createElement("strong");
+
+        estado.textContent =
+            esCorrecta ? "✓ RESPUESTA CORRECTA" : "✗ RESPUESTA INCORRECTA";
+
+        div.appendChild(titulo);
+        div.appendChild(respuestaAlumno);
+        div.appendChild(respuestaCorrecta);
+        div.appendChild(explicacion);
+        div.appendChild(estado);
+
+        contenedor.appendChild(div);
+
+    });
+
+}
+
+
+/* ==========================================
+   CARGAR LOGO PARA PDF
+========================================== */
+
+function cargarImagen(ruta) {
+
+    return new Promise(function(resolve) {
+
+        const imagen = new Image();
+
+        imagen.onload = function() {
+            resolve(imagen);
+        };
+
+        imagen.onerror = function() {
+            resolve(null);
+        };
+
+        imagen.src = ruta;
+
+    });
+
+}
+
+
+/* ==========================================
+   DESCARGAR PDF
+========================================== */
+
+document.getElementById("descargar").addEventListener("click", generarPDF);
+
+
+async function generarPDF() {
+
+    if (!window.jspdf) {
+
+        alert(
+            "No se pudo cargar el generador de PDF. Revisa tu conexión a internet y vuelve a intentarlo."
+        );
+
+        return;
+
+    }
+
+    const boton = document.getElementById("descargar");
+
+    boton.disabled = true;
+    boton.textContent = "GENERANDO REPORTE...";
+
+    try {
+
+        const { jsPDF } = window.jspdf;
+
+        const pdf = new jsPDF({
+            orientation: "portrait",
+            unit: "mm",
+            format: "a4"
+        });
+
+        const logo = await cargarImagen(
+            "./img/c3cfebf3-f346-4060-aee7-626abc96c8a9.png"
+        );
+
+        let y = 15;
+
+        // Encabezado del reporte
+
+        if (logo) {
+
+            try {
+
+                const canvas = document.createElement("canvas");
+                canvas.width = logo.naturalWidth;
+                canvas.height = logo.naturalHeight;
+
+                const contexto = canvas.getContext("2d");
+                contexto.drawImage(logo, 0, 0);
+
+                const imagenBase64 = canvas.toDataURL("image/png");
+
+                pdf.addImage(imagenBase64, "PNG", 15, y, 23, 23);
+
+            } catch (error) {
+
+                console.warn("No se pudo agregar el logo al PDF.", error);
+
+            }
+
+        }
+
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(16);
+        pdf.text("MATEMÁTICAS EN ACCIÓN", 45, y + 8);
+
+        pdf.setFontSize(11);
+        pdf.text("REPORTE DE EVALUACIÓN FINAL", 45, y + 16);
+
+        y += 32;
+
+        pdf.setDrawColor(190, 205, 220);
+        pdf.line(15, y, 195, y);
+
+        y += 10;
+
+        const datos = contarResultados();
+
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(11);
+
+        const informacion = [
+            "Estudiante: " + nombreEstudiante,
+            "Grupo: Cuarto grado",
+            "Total de preguntas: 20",
+            "Respuestas correctas: " + datos.correctas,
+            "Respuestas incorrectas: " + datos.incorrectas,
+            "Preguntas sin responder: " + datos.sinResponder,
+            "Puntuación obtenida: " + datos.puntos.toFixed(1) + " de 30 puntos",
+            "Porcentaje de aciertos: " + datos.porcentaje + "%"
+        ];
+
+        informacion.forEach(function(linea) {
+
+            pdf.text(linea, 15, y);
+            y += 7;
+
+        });
+
+        y += 5;
+
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(13);
+        pdf.text("REVISIÓN DE LAS 20 PREGUNTAS", 15, y);
+
+        y += 9;
+
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(9);
+
+        preguntas.forEach(function(pregunta, i) {
+
+            const correcta =
+                respuestas[i] === pregunta.correcta;
+
+            const respuestaAlumno =
+                respuestas[i] === null
+                    ? "Sin responder"
+                    : pregunta.opciones[respuestas[i]];
+
+            const texto =
+                (i + 1) + ". " + pregunta.pregunta +
+                "\nTu respuesta: " + respuestaAlumno +
+                "\nRespuesta correcta: " + pregunta.opciones[pregunta.correcta] +
+                "\nResultado: " + (correcta ? "CORRECTA" : "INCORRECTA") +
+                "\nExplicación: " + pregunta.explicacion;
+
+            const lineas = pdf.splitTextToSize(texto, 175);
+
+            const altura = lineas.length * 4.5 + 5;
+
+            if (y + altura > 280) {
+
+                pdf.addPage();
+                y = 18;
+
+            }
+
+            pdf.text(lineas, 15, y);
+
+            y += altura;
+
+        });
+
+        // Página de resultados por módulo
+
+        pdf.addPage();
+
+        y = 20;
+
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(13);
+
+        pdf.text("RESULTADOS POR MÓDULO", 15, y);
+
+        y += 12;
+
+        const modulos = datosModulos();
+
+        Object.values(modulos).forEach(function(modulo) {
+
+            const porcentaje = Math.round(
+                modulo.correctas / modulo.total * 100
+            );
+
+            let comentario;
+
+            if (modulo.correctas === modulo.total) {
+                comentario = "Excelente dominio de los contenidos.";
+            } else if (modulo.correctas >= Math.ceil(modulo.total / 2)) {
+                comentario = "Buen avance. Se recomienda continuar practicando.";
+            } else {
+                comentario = "Es necesario repasar los contenidos y resolver más ejercicios.";
+            }
+
+            const texto =
+                modulo.nombre +
+                "\nRespuestas correctas: " + modulo.correctas + " de " + modulo.total +
+                "\nPuntos obtenidos: " + (modulo.correctas * VALOR).toFixed(1) +
+                "\nPorcentaje: " + porcentaje + "%" +
+                "\nRetroalimentación: " + comentario;
+
+            const lineas = pdf.splitTextToSize(texto, 175);
+
+            const altura = lineas.length * 5 + 9;
+
+            if (y + altura > 275) {
+
+                pdf.addPage();
+                y = 20;
+
+            }
+
+            pdf.setFont("helvetica", "normal");
+            pdf.setFontSize(10);
+
+            pdf.text(lineas, 15, y);
+
+            y += altura;
+
+        });
+
+        y += 5;
+
+        if (y > 265) {
+            pdf.addPage();
+            y = 20;
+        }
+
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(11);
+
+        pdf.text("MENSAJE FINAL", 15, y);
+
+        y += 7;
+
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(10);
+
+        const mensaje =
+            datos.porcentaje >= 90
+                ? "¡Felicidades! Excelente desempeño en la evaluación."
+                : datos.porcentaje >= 70
+                    ? "Buen trabajo. Continúa fortaleciendo tus aprendizajes."
+                    : "Continúa practicando y repasando los contenidos.";
+
+        const textoFinal = pdf.splitTextToSize(
+            mensaje +
+            "\nRecuerda subir este reporte en formato PDF a la actividad correspondiente de Moodle.",
+            175
+        );
+
+        pdf.text(textoFinal, 15, y);
+
+        // Nombre del archivo
+
+        const nombreArchivo = nombreEstudiante
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-zA-Z0-9_-]/g, "_");
+
+        pdf.save("Resultados_Matematicas_" + nombreArchivo + ".pdf");
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Ocurrió un problema al generar el PDF. Comprueba tu conexión e inténtalo nuevamente."
+        );
+
+    } finally {
+
+        boton.disabled = false;
+        boton.textContent = "DESCARGAR REPORTE PDF";
+
+    }
+
+}
+
+
+/* ==========================================
+   IMPRIMIR
+========================================== */
+
+document.getElementById("imprimir").addEventListener("click", function() {
+
+    window.print();
+
+});
+
+</script>
+
+</body>
+</html>
